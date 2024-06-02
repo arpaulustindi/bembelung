@@ -10,7 +10,15 @@ $sql_baca = '';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql_baca = "SELECT b.id AS id, b.waktu AS waktu, k.kategori AS kategori, b.judul AS judul, b.berita AS berita FROM berita b, kategori k WHERE b.id=" . $id . " AND k.id = (SELECT b.kategori_id)";
+    $sql_baca = "SELECT 
+                    b.id AS id, 
+                    b.waktu AS waktu, 
+                    k.kategori AS kategori, 
+                    b.judul AS judul, 
+                    b.berita AS berita 
+                FROM berita b, kategori k 
+                WHERE b.id=" . $id . " AND k.id = (SELECT b.kategori_id)";
+                
     $query_baca = mysqli_query($conn, $sql_baca);
     $data_baca = mysqli_fetch_assoc($query_baca);
     $waktu = $data_baca['waktu'];

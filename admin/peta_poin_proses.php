@@ -16,10 +16,26 @@ if (isset($_POST['mode'])) {
     $lokasi = $_POST['lokasi'];
     $keterangan = $_POST['keterangan'];
     if ($_POST['mode'] == 'tambah') {
-        $sql = "INSERT INTO peta_poin(lat,lon,lokasi,keterangan) VALUES('" . $lat . "','" . $lon . "','" . $lokasi . "','" . $keterangan . "')";
+        $sql = "INSERT INTO peta_poin(
+                    lat,
+                    lon,
+                    lokasi,
+                    keterangan) 
+                VALUES(
+                    '" . $lat . "',
+                    '" . $lon . "',
+                    '" . $lokasi . "',
+                    '" . $keterangan . "')";
+
         $pesan = "Tambah " . $pesan;
     } else if ($_POST['mode'] == 'edit') {
-        $sql = "UPDATE peta_poin SET lat='" . $lat . "',lon = '" . $lon . "', lokasi = '" . $lokasi . "', keterangan = '" . $keterangan . "' WHERE id = " . $id;
+        $sql = "UPDATE peta_poin SET 
+                    lat='" . $lat . "',
+                    lon = '" . $lon . "', 
+                    lokasi = '" . $lokasi . "', 
+                    keterangan = '" . $keterangan . "' 
+                WHERE id = " . $id;
+                
         $pesan = "Update " . $pesan;
     }
 }

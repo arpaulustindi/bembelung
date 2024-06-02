@@ -8,7 +8,13 @@ $_halaman_footer_card = 'Berita';
 //Variabel MySQL
 include('_koneksi.php');
 
-$sql_tabel = "SELECT b.id AS id, b.waktu AS waktu, b.judul AS judul, k.kategori AS kategori FROM berita b, kategori k WHERE k.id = (SELECT b.kategori_id)";
+$sql_tabel = "SELECT 
+                b.id AS id, 
+                b.waktu AS waktu, 
+                b.judul AS judul, 
+                k.kategori AS kategori 
+              FROM berita b, kategori k 
+              WHERE k.id = (SELECT b.kategori_id)";
 $query_tabel = mysqli_query($conn, $sql_tabel);
 
 ?>

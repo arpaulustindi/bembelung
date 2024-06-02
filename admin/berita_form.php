@@ -47,10 +47,10 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'edit') {
                 while ($data_kategori = mysqli_fetch_array($query_kategori)) {
                 ?>
                     <option value="<?php echo $data_kategori['id']; ?>" <?php
-                                                                        if ($mode == 'edit' && $data_kategori['id'] == $kategori_id) {
-                                                                            echo "selected";
-                                                                        }
-                                                                        ?>>
+                        if ($mode == 'edit' && $data_kategori['id'] == $kategori_id) {
+                            echo "selected";
+                        }
+                        ?>>
                         <?php echo $data_kategori['kategori']; ?>
                     </option>
                 <?php

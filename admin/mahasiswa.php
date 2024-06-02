@@ -8,7 +8,14 @@ $_halaman_footer_card = 'Mahasiswa';
 //Variabel MySQL
 include('_koneksi.php');
 
-$sql_tabel = "SELECT m.nim AS nim, p.prodi AS prodi, m.nama AS nama, m.angkatan AS angkatan FROM mahasiswa m, prodi p WHERE p.kode = (SELECT m.prodi_kode)";
+$sql_tabel = "SELECT 
+                m.nim AS nim, 
+                p.prodi AS prodi, 
+                m.nama AS nama, 
+                m.angkatan AS angkatan 
+              FROM mahasiswa m, prodi p 
+              WHERE p.kode = (SELECT m.prodi_kode)";
+              
 $query_tabel = mysqli_query($conn, $sql_tabel);
 
 ?>

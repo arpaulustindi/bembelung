@@ -15,7 +15,17 @@ if (isset($_POST['mode'])) {
     $nama = $_POST['nama'];
     $angkatan = $_POST['angkatan'];
     if ($_POST['mode'] == 'tambah') {
-        $sql = "INSERT INTO mahasiswa(nim,prodi_kode,nama,angkatan) VALUES('" . $nim . "','" . $prodi_kode . "','" . $nama . "','" . $angkatan . "')";
+        $sql = "INSERT INTO mahasiswa(
+                    nim,
+                    prodi_kode,
+                    nama,
+                    angkatan) 
+                VALUES(
+                    '" . $nim . "',
+                    '" . $prodi_kode . "',
+                    '" . $nama . "',
+                    '" . $angkatan . "')";
+                    
         $pesan = "Tambah " . $pesan;
     } else if ($_POST['mode'] == 'edit') {
         $sql = "UPDATE mahasiswa SET nim = '" . $nim . "', prodi_kode = '" . $prodi_kode . "', nama = '" . $nama . "', angkatan='" . $angkatan . "' WHERE nim = " . $nim_old;

@@ -16,10 +16,24 @@ if (isset($_POST['mode'])) {
     $judul = $_POST['judul'];
     $berita = $_POST['berita'];
     if ($_POST['mode'] == 'tambah') {
-        $sql = "INSERT INTO berita(waktu,kategori_id,judul,berita) VALUES('" . $waktu . "','" . $kategori_id . "','" . $judul . "','" . $berita . "')";
+        $sql = "INSERT INTO berita(
+                    waktu,
+                    kategori_id,
+                    judul,
+                    berita) 
+                VALUES('" . $waktu . "',
+                    '" . $kategori_id . "',
+                    '" . $judul . "',
+                    '" . $berita . "')";
+
         $pesan = "Tambah " . $pesan;
     } else if ($_POST['mode'] == 'edit') {
-        $sql = "UPDATE berita SET waktu = '" . $waktu . "',kategori_id = '" . $kategori_id . "', judul = '" . $judul . "', berita = '" . $berita . "' WHERE id = " . $id;
+        $sql = "UPDATE berita SET 
+                    waktu = '" . $waktu . "',
+                    kategori_id = '" . $kategori_id . "', 
+                    judul = '" . $judul . "', 
+                    berita = '" . $berita . "' 
+                WHERE id = " . $id;
         $pesan = "Update " . $pesan;
     }
 }

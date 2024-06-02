@@ -11,7 +11,13 @@ if(isset($_POST['mode'])){
     $kode_old = $_POST['kode_old'];
     $prodi = $_POST['prodi'];
     if($_POST['mode'] == 'tambah'){
-        $sql = "INSERT INTO prodi(kode,prodi) VALUES('".$kode."','".$prodi."')";
+        $sql = "INSERT INTO prodi(
+                    kode,
+                    prodi) 
+                VALUES(
+                    '".$kode."',
+                    '".$prodi."')";
+                    
         $pesan = "Tambah ".$pesan;
     } else if($_POST['mode'] == 'edit'){
         $sql = "UPDATE prodi SET kode = '".$kode."', prodi = '".$prodi."' WHERE kode = ".$kode_old;
