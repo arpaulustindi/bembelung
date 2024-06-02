@@ -1,13 +1,13 @@
 # Kuneneng
 ## Implementasi ADMINLTE ke PHP MySQL
 Dalam source code ini anda akan mendapatkan contoh :
-1. Penggunan Peta Dasar dan Point yang terintagrasi pada database php mysql.
+1. Penggunan Peta Basic (LeafletJS) dalam bentuk Point yang terintagrasi ddengan database php mysql.
 2. Penggunaan Plugin Data Tables
 3. Penggunaan Plugin Select2
 4. Penggunaan Plugin Summernote
 5. Form Dalam Bentuk Modal Dialog
 6. Komponen Dasar Pada AdminLTE/Bootstrap dkk.
-7. 
+   
 ### Tahapan Persiapan
 #### 1. XAMP
 Silahkan Download XAMPP dengan PHP Min Versi 8.
