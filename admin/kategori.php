@@ -1,14 +1,20 @@
 <?php
 //Konfigurasi Halaman
-$_halaman_judul_tab = 'Kategori Berita';
-$_halaman_judul_halaman = 'Kategori Berita';
-$_halaman_judul_card = 'Kategori Berita';
-$_halaman_footer_card = 'Kategori Berita';
+$_halaman_judul_tab = 'Kategori';
+$_halaman_judul_halaman = 'Kategori';
+$_halaman_judul_card = 'Kategori : Contoh Sederhana Untuk Primary Key dengan Nama Kolom (id) Dengan Type Data Integer dan Ekstra Auto Increment';
+$_halaman_footer_card = 'Kategori';
+
+$_button_tambah_cap = 'Tambah Kategori';
+
+$_nama_file_form = 'kategori_form.php';
+$_nama_file_proses = 'kategori_proses.php';
+$_nama_kolom_primary = 'id';
 
 //Variabel MySQL
 include('_koneksi.php');
 
-$sql_tabel = "SELECT * FROM kategori";
+$sql_tabel = "SELECT * FROM kategori"; //kategori merupakan nama tabel
 $query_tabel = mysqli_query($conn, $sql_tabel);
 
 ?>
@@ -62,7 +68,7 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
           <div class="card-header">
             <h3 class="card-title"><?php echo $_halaman_judul_card; ?></h3>
             <div class="float-right">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('kategori_form.php','tambah',null);">Tambah Kategori Baru</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('kategori_form.php','tambah',null);"><?php echo $_button_tambah_cap;?></button>
             </div>
           </div>
           <div class="card-body">
@@ -73,6 +79,8 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
                 <tr>
                   <th>ID</th>
                   <th>Kategori</th>
+                  <th>Deskripsi</th>
+
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -83,9 +91,11 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
                   <tr>
                     <td><?php echo $data_tabel['id']; ?></td>
                     <td><?php echo $data_tabel['kategori']; ?></td>
+                    <td><?php echo $data_tabel['deskripsi']; ?></td>
+
                     <td>
-                      <button onclick="aksi('kategori_form.php','edit','<?php echo $data_tabel['id']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
-                      <a href="kategori_proses.php?mode=hapus&id=<?php echo $data_tabel['id']; ?>" class="btn btn-danger">Hapus</a>
+                      <button onclick="aksi('<?php echo $_nama_file_form;?>','edit','<?php echo $data_tabel['id']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
+                      <a href="<?php echo $_nama_file_proses;?>?mode=hapus&<?php echo $_nama_kolom_primary;?>=<?php echo $data_tabel['id']; ?>" class="btn btn-danger">Hapus</a>
                     </td>
                   </tr>
                 <?php
@@ -158,8 +168,8 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
     <script>
       //$(document).ready(function(){
 
-      function aksi(_link, _mode, _id) {
-        $(".modal-content").load(_link + "?mode=" + _mode + "&id=" + _id, function(response, status, xhr) {
+      function aksi(_link, _mode, _<?php echo $_nama_kolom_primary;?>) {
+        $(".modal-content").load(_link + "?mode=" + _mode + "&<?php echo $_nama_kolom_primary;?>=" + _<?php echo $_nama_kolom_primary;?>, function(response, status, xhr) {
           if (status == "error") {
             $(".modal-content").html("Terjadi Error: " + xhr.status + " " + xhr.statusText);
           }

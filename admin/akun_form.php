@@ -1,12 +1,13 @@
 <?php
 $mode = 'tambah';
 $cap = 'Tambah';
-$_nama_file_proses = 'kategori_proses.php';
+$_nama_file_proses = 'akun_proses.php';
 
 //Seluruh Variabel Kolom
 $id = '';
-$kategori = '';
-$deskripsi = '';
+$akun = '';
+$sandi = '';
+$role = '';
 
 if (isset($_GET['mode']) && $_GET['mode'] == 'edit') {
     include('_koneksi.php');
@@ -16,14 +17,16 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'edit') {
     //Variabel dikirim (Penamaan harus sesuai nama kolom primary)
     $id = $_GET['id'];
 
-    $sql = "SELECT * FROM kategori WHERE id =" . $id;
+    $sql = "SELECT * FROM akun WHERE id =" . $id;
 
     $query = mysqli_query($conn, $sql);
     $data = mysqli_fetch_assoc($query);
 
     //Variabel Kolom Selain Primary Key
-    $kategori = $data['kategori'];
-    $deskripsi = $data['deskripsi'];
+    $akun = $data['akun'];
+    $sandi = $data['sandi'];
+    $nama = $data['nama'];
+    $role = $data['role'];
 }
 ?>
 <form action="<?php echo $_nama_file_proses;?>" method="POST">
@@ -39,12 +42,24 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'edit') {
             <input type="number" class="form-control" value="<?php echo $id; ?>" name="id" placeholder="ID" readonly>
         </div>
         <div class="form-group">
-            <label>Kategori</label>
-            <input type="text" class="form-control" value="<?php echo $kategori; ?>" name="kategori" placeholder="Kategori">
+            <label>Akun</label>
+            <input type="text" class="form-control" value="<?php echo $akun; ?>" name="akun" placeholder="Akun">
         </div>
         <div class="form-group">
-            <label>Deskripsi</label>
-            <input type="text" class="form-control" value="<?php echo $deskripsi; ?>" name="deskripsi" placeholder="Deskripsi">
+            <label>Sandi</label>
+            <input type="password" class="form-control" value="<?php echo $sandi; ?>" name="sandi" placeholder="sandi">
+        </div>
+        <div class="form-group">
+            <label>Nama</label>
+            <input type="text" class="form-control" value="<?php echo $nama; ?>" name="nama" placeholder="Nama Lengkap">
+        </div>
+        <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" name="role" placeholder="Role">
+                <option value="super">Super</option>
+                <option value="admin">Admin</option>
+                <option value="operator">Operator</option>
+            </select>
         </div>
     </div>
     <div class="modal-footer justify-content-between">

@@ -1,9 +1,15 @@
 <?php
+session_start();
+ 
+if (!isset($_SESSION['login'])) {
+    header("location: _login.php");
+    exit();
+}
 //Konfigurasi Halaman
-$_halaman_judul_tab = 'Judul Tab';
-$_halaman_judul_halaman = 'Judul Halaman';
-$_halaman_judul_card = 'Judul Card';
-$_halaman_footer_card = 'Footer Card';
+$_halaman_judul_tab = 'Otorisasi All';
+$_halaman_judul_halaman = 'Otorisasi All';
+$_halaman_judul_card = 'Otorisasi All';
+$_halaman_footer_card = 'Otorisasi All';
 
 
 ?>

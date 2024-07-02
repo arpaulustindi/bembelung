@@ -1,22 +1,25 @@
 <?php
 //Konfigurasi Halaman
-$_halaman_judul_tab = 'Berita';
-$_halaman_judul_halaman = 'Berita';
-$_halaman_judul_card = 'Berita';
-$_halaman_footer_card = 'Berita';
+$_halaman_judul_tab = 'Produk';
+$_halaman_judul_halaman = 'Produk';
+$_halaman_judul_card = 'Produk :Contoh Untuk Primary Key dengan Nama Kolom (kode) Dengan Type Data Varchar (kode diisi manual)';
+$_halaman_footer_card = 'Produk';
+
+$_button_tambah_cap = 'Tambah Produk';
+
+$_nama_file_form = 'produk_form.php';
+$_nama_file_proses = 'produk_proses.php';
+$_nama_kolom_primary = 'kode';
 
 //Variabel MySQL
 include('_koneksi.php');
 
-$sql_tabel = "SELECT 
-                b.id AS id, 
-                b.waktu AS waktu, 
-                b.judul AS judul, 
-                k.kategori AS kategori 
-              FROM berita b, kategori k 
-              WHERE k.id = (SELECT b.kategori_id)";
+$sql_tabel = "SELECT * FROM produk"; //produk merupakan nama tabel
 $query_tabel = mysqli_query($conn, $sql_tabel);
 
+//**AWAL BLOK KHUSUS UNTUK FILE
+include('_config_file.php');
+//**AKHIR BLOK KHUSUS UNTUK FILE
 ?>
 
 <!DOCTYPE html>
@@ -35,14 +38,6 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!--/*DATA TABLE -->
 
-  <!-- SUMMERNOTE -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-  <!-- /*SUMMERNOTE -->
-
-  <!-- SELECT 2 -->
-  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- /*SELECT 2 -->
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -76,7 +71,7 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
           <div class="card-header">
             <h3 class="card-title"><?php echo $_halaman_judul_card; ?></h3>
             <div class="float-right">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('berita_form.php','tambah',null);">Tambah Berita Baru</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('produk_form.php','tambah',null);"><?php echo $_button_tambah_cap;?></button>
             </div>
           </div>
           <div class="card-body">
@@ -85,10 +80,13 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
             <table id="tabel" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Kategori</th>
-                  <th>Judul</th>
-                  <th>Waktu</th>
+                  <th>Kode</th>
+                  <th>Produk</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Gambar</th>
+                  <th>Keterangan</th>
+
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -97,14 +95,28 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
                 while ($data_tabel = mysqli_fetch_array($query_tabel)) {
                 ?>
                   <tr>
-                    <td><?php echo $data_tabel['id']; ?></td>
-                    <td><?php echo $data_tabel['kategori']; ?></td>
-                    <td><?php echo $data_tabel['judul']; ?></td>
-                    <td><?php echo $data_tabel['waktu']; ?></td>
+                    <td><?php echo $data_tabel['kode']; ?></td>
+                    <td><?php echo $data_tabel['produk']; ?></td>
+                    <td><?php echo $data_tabel['harga']; ?></td>
+                    <td><?php echo $data_tabel['stok']; ?></td>
+                    <!--AWAL KHUSUS GAMBAR-->
                     <td>
-                      <button onclick="baca('<?php echo $data_tabel['id']; ?>');" class="btn btn-primary " data-toggle="modal" data-target="#modal-form">Baca</button>
-                      <button onclick="aksi('berita_form.php','edit','<?php echo $data_tabel['id']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
-                      <a href="berita_proses.php?mode=hapus&id=<?php echo $data_tabel['id']; ?>" class="btn btn-danger">Hapus</a>
+                      <?php
+                        if($data_tabel['gambar'] != null){
+                          ?>
+                          <img src="<?php echo $url_folder.$data_tabel['gambar'];?>" width="60px" height="40px"/>
+                          <?php
+                        } else {
+                          echo "Tidak Ada Gambar";
+                        }
+                      ?>
+                     </td>
+                    <!--AKHIR KHUSUS GAMBAR-->
+                    <td><?php echo $data_tabel['keterangan']; ?></td>
+
+                    <td>
+                      <button onclick="aksi('<?php echo $_nama_file_form;?>','edit','<?php echo $data_tabel['kode']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
+                      <a href="<?php echo $_nama_file_proses;?>?mode=hapus&<?php echo $_nama_kolom_primary;?>=<?php echo $data_tabel['kode']; ?>&gambar=<?php echo $data_tabel['gambar'];?>" class="btn btn-danger">Hapus</a>
                     </td>
                   </tr>
                 <?php
@@ -165,23 +177,8 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   </script>
   <!--/*DATA TABLE-->
 
-  <!-- SUMMERNOTE -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- /*SUMMERNOTE -->
-
-
-  <!-- SELECT 2 -->
-  <script src="plugins/select2/js/select2.full.min.js"></script>
-  <script>
-    $(function() {
-      $('.select2').select2()
-    });
-  </script>
-
-  <!-- /*SELECT 2 -->
-
   <div class="modal fade" id="modal-form">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog">
       <div class="modal-content">
 
         <!-- /.modal-content -->
@@ -192,24 +189,8 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
     <script>
       //$(document).ready(function(){
 
-      function aksi(_link, _mode, _id) {
-        $(".modal-content").load(_link + "?mode=" + _mode + "&id=" + _id, function(response, status, xhr) {
-          if (status == "error") {
-            $(".modal-content").html("Terjadi Error: " + xhr.status + " " + xhr.statusText);
-          }
-          //SUMMERNOTE
-          $(function() {
-            $('#summernote').summernote({
-              height: 200
-            })
-          })
-
-          //SUMMERNOTE
-        });
-      }
-
-      function baca(_id) {
-        $(".modal-content").load("berita_baca.php?id=" + _id, function(response, status, xhr) {
+      function aksi(_link, _mode, _<?php echo $_nama_kolom_primary;?>) {
+        $(".modal-content").load(_link + "?mode=" + _mode + "&<?php echo $_nama_kolom_primary;?>=" + _<?php echo $_nama_kolom_primary;?>, function(response, status, xhr) {
           if (status == "error") {
             $(".modal-content").html("Terjadi Error: " + xhr.status + " " + xhr.statusText);
           }

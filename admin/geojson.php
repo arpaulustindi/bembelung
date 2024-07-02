@@ -1,18 +1,24 @@
 <?php
 //Konfigurasi Halaman
-$_halaman_judul_tab = 'Peta Poin';
-$_halaman_judul_halaman = 'Peta Poin';
-$_halaman_judul_card = 'Peta Poin';
-$_halaman_footer_card = 'Peta Poin';
+$_halaman_judul_tab = 'Geojson';
+$_halaman_judul_halaman = 'Geojson';
+$_halaman_judul_card = 'Geojson : Contoh Sederhana Untuk Peta Menggunakan File GeoJSON';
+$_halaman_footer_card = 'Geojson';
+
+$_button_tambah_cap = 'Tambah Geojson';
+
+$_nama_file_form = 'geojson_form.php';
+$_nama_file_proses = 'geojson_proses.php';
+$_nama_kolom_primary = 'id';
 
 //Variabel MySQL
 include('_koneksi.php');
 
-$sql_peta = "SELECT * FROM peta_poin";
-$query_peta = mysqli_query($conn, $sql_peta);
-
-$sql_tabel = "SELECT * FROM peta_poin";
+$sql_tabel = "SELECT * FROM geojson"; //geojson merupakan nama tabel
 $query_tabel = mysqli_query($conn, $sql_tabel);
+
+$sql_peta = "SELECT * FROM geojson"; //geojson merupakan nama tabel
+$query_peta = mysqli_query($conn, $sql_peta);
 
 ?>
 
@@ -25,15 +31,6 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   <title><?php echo $_halaman_judul_tab; ?></title>
   <?php include('_part/_referensi.php'); ?>
 
-  <!--PETA : LEAFLET -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <style>
-    #peta {
-      height: 250px;
-    }
-  </style>
-  <!--/*PETA : LEAFLET -->
 
   <!--DATA TABLE -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -41,9 +38,17 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!--/*DATA TABLE -->
 
-  <!-- SUMMERNOTE -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-  <!-- /*SUMMERNOTE -->
+  <!--PETA : LEAFLET -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <style>
+    #peta {
+      height: 400px;
+    }
+  </style>
+  <!--/*PETA : LEAFLET -->
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -71,9 +76,8 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
 
       <!-- Main content -->
       <section class="content">
-
-        <!-- Default box -->
-        <div class="card">
+         <!-- Default box -->
+         <div class="card">
           <div class="card-header">
             <h3 class="card-title"><?php echo $_halaman_judul_card; ?></h3>
           </div>
@@ -95,9 +99,9 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data Poin</h3>
+            <h3 class="card-title"><?php echo $_halaman_judul_card; ?></h3>
             <div class="float-right">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('peta_poin_form.php','tambah',null);">Tambah Poin Baru</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modal-form" onclick="aksi('geojson_form.php','tambah',null);"><?php echo $_button_tambah_cap;?></button>
             </div>
           </div>
           <div class="card-body">
@@ -107,9 +111,9 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>LAT</th>
-                  <th>LON</th>
-                  <th>Lokasi</th>
+                  <th>Label</th>
+                  <th>Geojson</th>
+
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -119,12 +123,12 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
                 ?>
                   <tr>
                     <td><?php echo $data_tabel['id']; ?></td>
-                    <td><?php echo $data_tabel['lat']; ?></td>
-                    <td><?php echo $data_tabel['lon']; ?></td>
-                    <td><?php echo $data_tabel['lokasi']; ?></td>
+                    <td><?php echo $data_tabel['label']; ?></td>
+                    <td><?php echo $data_tabel['geojson']; ?></td>
+
                     <td>
-                      <button onclick="aksi('peta_poin_form.php','edit','<?php echo $data_tabel['id']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
-                      <a href="peta_poin_proses.php?mode=hapus&id=<?php echo $data_tabel['id']; ?>" class="btn btn-danger">Hapus</a>
+                      <button onclick="aksi('<?php echo $_nama_file_form;?>','edit','<?php echo $data_tabel['id']; ?>');" class="btn btn-success aksi" data-toggle="modal" data-target="#modal-form">Edit</button>
+                      <a href="<?php echo $_nama_file_proses;?>?mode=hapus&<?php echo $_nama_kolom_primary;?>=<?php echo $data_tabel['id']; ?>&geojson=<?php echo $data_tabel['geojson'];?>" class="btn btn-danger">Hapus</a>
                     </td>
                   </tr>
                 <?php
@@ -137,7 +141,7 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            Data Poin
+            <?php echo $_halaman_footer_card; ?>
           </div>
           <!-- /.card-footer-->
         </div>
@@ -158,30 +162,34 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   <script>
     var lat_tengah = 3.610506;
     var lon_tengah = 125.497011;
-    var zoom_peta = 13;
+    var zoom_peta = 12;
     var peta = L.map('peta').setView([lat_tengah, lon_tengah], zoom_peta);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(peta);
 
-    //Menambahkan Data Dari MySQL
     <?php
-    $no_marker = 0;
-    while ($data_peta = mysqli_fetch_array($query_peta)) {
-      $no_marker++;
-    ?>
-      var marker<?php echo $no_marker; ?> = L.marker(
-          [
-            <?php echo $data_peta['lat']; ?>,
-            <?php echo $data_peta['lon']; ?>
-          ]
-        )
-        .addTo(peta)
-        .bindPopup(
-          '<?php echo $data_peta['keterangan']; ?>'
-        );
+    //**AWAL BLOK KHUSUS UNTUK FILE
+    include('_config_file.php');
+    //**AKHIR BLOK KHUSUS UNTUK FILE
 
+    $nomor_variabel = 0;
+    while ($data_peta = mysqli_fetch_array($query_peta)) {
+    $nomor_variabel++;
+    ?>
+    var geojson_url<?php echo $nomor_variabel;?> = '<?php echo $url_folder.$data_peta['geojson'];?>';
+
+    function set_popup<?php echo $nomor_variabel;?>(feature, layer) {
+            if (feature.properties && feature.properties.name) {
+                layer.bindPopup(feature.properties.name);
+            }
+        }
+    var geojsonLayer<?php echo $nomor_variabel;?> = new L.GeoJSON.AJAX(geojson_url<?php echo $nomor_variabel;?>, {
+      onEachFeature: set_popup<?php echo $nomor_variabel;?>
+    });
+      geojsonLayer<?php echo $nomor_variabel;?>.addTo(peta);
+    
     <?php
     }
     ?>
@@ -219,10 +227,6 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
   </script>
   <!--/*DATA TABLE-->
 
-  <!-- SUMMERNOTE -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- /*SUMMERNOTE -->
-
   <div class="modal fade" id="modal-form">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -235,18 +239,11 @@ $query_tabel = mysqli_query($conn, $sql_tabel);
     <script>
       //$(document).ready(function(){
 
-      function aksi(_link, _mode, _id) {
-        $(".modal-content").load(_link + "?mode=" + _mode + "&id=" + _id, function(response, status, xhr) {
+      function aksi(_link, _mode, _<?php echo $_nama_kolom_primary;?>) {
+        $(".modal-content").load(_link + "?mode=" + _mode + "&<?php echo $_nama_kolom_primary;?>=" + _<?php echo $_nama_kolom_primary;?>, function(response, status, xhr) {
           if (status == "error") {
             $(".modal-content").html("Terjadi Error: " + xhr.status + " " + xhr.statusText);
           }
-          //SUMMERNOTE
-          $(function() {
-            $('#summernote').summernote({
-              height: 300
-            })
-          })
-          //SUMMERNOTE
         });
       }
       //});

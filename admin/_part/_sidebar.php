@@ -1,7 +1,7 @@
  <?php
     //Setting Awal
-    $_sidebar_nama_apilkasi = 'Nama Aplikasi';
-    $_sidebar_nama_pengguna = 'Nama Pengguna';
+    $_sidebar_nama_apilkasi = 'Bembelung';
+    $_sidebar_nama_pengguna = 'User Bembelung';
  ?>
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -21,64 +21,110 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-header">GROUP MENU 1</li>
+          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+          <li class="nav-header">GROUP MENU 1 : TANPA PERLU LOGIN</li>
+          <!--Mulai Menu-->
           <li class="nav-item">
-            <a href="peta_poin.php" class="nav-link">
-              <i class="nav-icon fas fa-map-marker"></i>
+            <a href="../index.php" class="nav-link">
+              <i class="nav-icon fas fa-globe"></i>
               <p>
-                Peta Poin
+                HALAMAN END USER
               </p>
             </a>
           </li>
-          <li class="nav-header">GROUP MENU 2</li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-newspaper"></i>
+            <a href="kategori.php" class="nav-link">
+              <i class="nav-icon fas fa-bars"></i>
               <p>
-                Berita
-                <i class="fas fa-angle-left right"></i>
+                Kategori
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="kategori.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kategori</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="berita.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Berita</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-university"></i>
+            <a href="produk.php" class="nav-link">
+              <i class="nav-icon fas fa-tag"></i>
               <p>
-                Mahasiswa
-                <i class="fas fa-angle-left right"></i>
+                Produk
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="prodi.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Data Prodi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="mahasiswa.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Mahasiswa</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="geojson.php" class="nav-link">
+              <i class="nav-icon fas fa-map"></i>
+              <p>
+                Geojson
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="akun.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Akun
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="_login.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Login
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+
+          <li class="nav-header">GROUP MENU 2 : PERLU LOGIN</li>
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="otoriasi_all_.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Otorasis All
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="otoriasi_all_.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Otorasis Admin
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="otoriasi_all_.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Otorasis Super dan Admin
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
+          <!--Mulai Menu-->
+          <li class="nav-item">
+            <a href="otoriasi_all_.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Otorasis Super
+              </p>
+            </a>
+          </li>
+          <!--Selesai Menu-->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.4873555106991,
+          3.610286935173486,
+          14.15932090840701
+        ]
+      },
+      "properties": {
+        "name": "Kampus Tahuna",
+        "styleUrl": "#__managed_style_04634AD1FE31A98F2CF6",
+        "styleMapHash": {
+          "normal": "#__managed_style_1103EE3C3231A98F2CF6",
+          "highlight": "#__managed_style_213EC42DD531A98F2CF6"
+        }
+      },
+      "id": "0A23E2743331A98EAC34"
+    }
+  ]
+}

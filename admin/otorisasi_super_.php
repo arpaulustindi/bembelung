@@ -1,9 +1,19 @@
 <?php
+session_start();
+ 
+if (!isset($_SESSION['login'])) {
+    header("location: _login.php");
+    exit();
+}
+if ($_SESSION['role'] != 'super') {
+  header("location: _login.php");
+  exit();
+}
 //Konfigurasi Halaman
-$_halaman_judul_tab = 'Judul Tab';
-$_halaman_judul_halaman = 'Judul Halaman';
-$_halaman_judul_card = 'Judul Card';
-$_halaman_footer_card = 'Footer Card';
+$_halaman_judul_tab = 'Otorisasi Hanya Super';
+$_halaman_judul_halaman = 'Otorisasi Hanya Super';
+$_halaman_judul_card = 'Otorisasi Hanya Super';
+$_halaman_footer_card = 'Otorisasi Hanya Super';
 
 
 ?>

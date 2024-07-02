@@ -11,7 +11,7 @@
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
-        <a class="nav-link" href="#" role="button">
+        <a class="nav-link" href="_logout_proses.php" role="button">
           <span>Log Out</span> <i class="fas fa-key"></i>
         </a>
       </li>
